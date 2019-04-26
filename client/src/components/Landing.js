@@ -1,7 +1,8 @@
 import React from 'react'
 import Login from './Login'
+import SignUp from './SignUp'
 
-const Landing = () => {
+const Landing = props => {
     const styles = {
         landingDiv: {
           border: 'solid darkred 1px',
@@ -11,7 +12,8 @@ const Landing = () => {
     return (
         <div style={styles.landingDiv}>
             Landing Filler
-            <Login />
+            <Login {...props} />
+            <SignUp {...props} />
         </div>
     )
 }
