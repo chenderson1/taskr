@@ -1,5 +1,5 @@
 {
-  "name": "taskr",
+  "name": "groupproject",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
@@ -7,15 +7,13 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/chenderson1/taskr.git"
-  },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/chenderson1/taskr/issues"
-  },
-  "homepage": "https://github.com/chenderson1/taskr#readme"
+  "dependencies": {
+    "express": "^4.16.4",
+    "mongoose": "^5.5.4",
+    "morgan": "^1.9.1",
+    "nodemon": "^1.18.11"
+  }
 }
