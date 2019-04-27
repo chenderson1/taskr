@@ -12,6 +12,7 @@ class Main extends Component {
       userId: '',
       fName: '',
       lName: '',
+      display: true,
     }
   }
 
@@ -40,7 +41,22 @@ class Main extends Component {
     //Add axios request to find if username is taken.  If successful, creates a new user using "User" model, takes them to Login.
   }
 
+  //Not working, Used on Landing to toggle login/signup displays
+  displayToggle = (e) => {
+    const { name } = e.target
+    e.persist()
+    this.setState(prevState => ({
+      [name]: !prevState.display
+    }))
+  }
+
   render() {
+    const props = {
+      loginUser: this.loginUser,
+      handleChange: this.handleChange,
+      displayToggle: this.displayToggle,
+      ...this.state,
+    }
     const styles = {
           mainDiv: {
             border: 'solid blue 1px',
@@ -49,8 +65,8 @@ class Main extends Component {
         }
     return (
         <div style={styles.mainDiv}>
-            <Landing loginUser={this.loginUser} handleChange={this.handleChange} />
-            <Dashboard />
+            <Landing {...props}/>
+            <Dashboard {...props}/>
         </div>
     )
   } 

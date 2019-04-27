@@ -15,7 +15,7 @@ const SignUp = props => {
             First Name: <input name='fName' placeholder='Enter first name' onChange={props.handleChange}></input> <br></br>
             Last Name: <input name='lName' placeholder='Enter last name' onChange={props.handleChange}></input> <br></br>
             Username: <input name='username' placeholder='Enter username' onChange={props.handleChange}></input> <br></br>
-            <button>Back</button><button>Sign Up</button>
+            <button name='display' onClick={props.displayToggle}>Back</button><button>Sign Up</button>
         </div>
     )
 }

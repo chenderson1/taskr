@@ -1,10 +1,13 @@
 import React from 'react'
+import { StyledTaskCard } from '../elements/index'
 
-const Task = () => {
+const Task = props => {
     return (
-        <div>
-            Task Filler
-        </div>
+        <StyledTaskCard>
+            Title: {props.title} -- {props.username} <br></br>
+            Description: {props.description} <br></br>
+            Due: {props.due}
+        </StyledTaskCard>
     )
 }
 
