@@ -16,7 +16,11 @@ const boardSchema = new Schema({
             type: Schema.Types.ObjectId,
             ref: "Task"
         }
-    ]
+    ],
+    time: {
+        type: Date,
+        default: Date.now()
+    }
 })
 
 module.exports = mongoose.model("Board", boardSchema)
