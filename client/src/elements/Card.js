@@ -16,7 +16,7 @@ export const StyledLoginCard = styled(StyledCard)`
     border-radius: 15px;
     margin-top: auto;
     margin-bottom: auto;
-    min-width: 300px;
+    
     padding: 10px;
     color: black;
     font-size: 22px;

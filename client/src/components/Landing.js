@@ -1,14 +1,14 @@
 import React from 'react'
-import Login from './Login'
-import SignUp from './SignUp'
+import Login from './nav/Login'
+import SignUp from './nav/SignUp'
 import { StyledFlexPage } from '../elements/index'
-import Greeting from './Greeting'
+import Greeting from './routedcomponents/Greeting'
 
 const Landing = props => {
     
     return (
         <StyledFlexPage>
-            {props.display === true ? <Login {...props} /> : <SignUp {...props} />}
+            
             <Greeting />
         </StyledFlexPage>
     )
