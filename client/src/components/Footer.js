@@ -1,4 +1,5 @@
 import React from 'react'
+import { StyledRibbon } from '../elements/index'
 import taskr from '../resources/taskr.png'
 
 
@@ -13,9 +14,9 @@ const Footer = () => {
         }
     }
     return (
-        <div style={styles.div}>
+        <StyledRibbon>
             <img src={taskr} alt="dinosaur icon" style={styles.img}/>
-        </div>
+        </StyledRibbon>
     )
 }
 

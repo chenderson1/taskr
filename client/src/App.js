@@ -5,15 +5,9 @@ import Main from './components/Main'
 import Footer from './components/Footer'
 
 function App() {
-  const styles = {
-    appDiv: {
-      border: 'solid green 1px',
-      margin: '5px'
-    }
-  }
+  
   return (
-    <div className="App" style={styles.appDiv}>
-      
+    <div className="App">
       <Header />
       <Main />
       <Footer />
