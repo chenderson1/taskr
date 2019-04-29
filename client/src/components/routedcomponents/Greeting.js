@@ -1,5 +1,5 @@
 import React from 'react'
-import taskr from '../resources/taskr.png'
+import taskr from '../../resources/taskr.png'
 
 const Greeting = () => {
     const styles = {

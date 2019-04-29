@@ -20,7 +20,7 @@ const Header = () => {
     }
     return (
         <div>
-            <h1 style={styles.h1}>t A s k ' r</h1>
+            <h1 style={styles.h1}>t a s k ' r</h1>
         </div>
     )
 }

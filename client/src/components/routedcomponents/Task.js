@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyledTaskCard } from '../elements/index'
+import { StyledTaskCard } from '../../elements/index'
 
 const Task = props => {
     return (
