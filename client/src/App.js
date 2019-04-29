@@ -13,7 +13,6 @@ function App() {
   }
   return (
     <div className="App" style={styles.appDiv}>
-      
       <Header />
       <Main />
       <Footer />

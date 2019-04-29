@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Header = () => {
+const Header = (props) => {
     //styles can be updated + deleted after learning styling components
     const styles = {
         h1: {
@@ -18,9 +18,10 @@ const Header = () => {
             right: '10px'
         }
     }
+    const { isLoggedIn, quote } = props
     return (
         <div>
-            <h1 style={styles.h1}>t a s k ' r</h1>
+            {!isLoggedIn ? <h1 style={styles.h1}>t a s k ' r</h1> : <h1>{quote}</h1>}
         </div>
     )
 }
