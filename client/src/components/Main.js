@@ -82,8 +82,6 @@ class Main extends Component {
     }
     const styles = {
           mainDiv: {
-            border: 'solid blue 1px',
-            margin: '5px',
             display: 'grid',
             gridTemplateColumns: 'auto auto'
           }

@@ -1,4 +1,5 @@
 import React from 'react'
+import { StyledRibbon } from '../elements/index'
 
 const Header = () => {
     //styles can be updated + deleted after learning styling components
@@ -19,9 +20,9 @@ const Header = () => {
         }
     }
     return (
-        <div>
+        <StyledRibbon>
             <h1 style={styles.h1}>t a s k ' r</h1>
-        </div>
+        </StyledRibbon>
     )
 }
 

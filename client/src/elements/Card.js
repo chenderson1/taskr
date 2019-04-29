@@ -21,6 +21,6 @@ export const StyledLoginCard = styled(StyledCard)`
     color: black;
     font-size: 22px;
     font-weight: bold;
-    background-color: #067F03;
+    background-color: #88d70a;
     
 `;
