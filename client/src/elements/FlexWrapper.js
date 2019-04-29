@@ -8,6 +8,14 @@ export const StyledFlex = styled.div`
 `;
 
 export const StyledFlexPage = styled(StyledFlex)`
-    background-color: beige;
-    margin: 5px;
+    background-color: #339dd4;
+    margin: 10px;
+    padding: 20px;
+    font-family: 'Ubuntu', sans-serif;
+    border-radius: 15px;
+    font-size: 26px;
+    font-weight: bold;
+    align-content: center;
+    justify-content: center;
+    vertical-align: center;
 `;
