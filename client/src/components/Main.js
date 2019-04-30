@@ -41,6 +41,18 @@ class Main extends Component {
     });
   };
 
+  boardaHndleChange = e => {
+    const { value } = e.target;
+    e.persist();
+    this.setState(ps => {
+      return {
+        user: {
+          board: [value, ...ps.board]
+        }
+      }
+    });
+  };
+
   //Not working, Used on Landing -> Login
   loginUser = () => {
     this.setState({ isLoggedIn: true });
