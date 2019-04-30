@@ -15,6 +15,7 @@ class Main extends Component {
       fName: '',
       lName: '',
       display: true,
+      newUser: {},
       User: {},
     }
   }
@@ -29,17 +30,38 @@ class Main extends Component {
     //   .catch(err => console.log(err.response.data.errMsg))
   }
 
-  //Working, Used on Landing -> Login
-    //Saves user data to State
+  //Working, Used on Nav -> Login / SignUp
+    //Saves user data to State, calls updateNewUser
   handleChange = (e) => {
     const { name, value } = e.target
     e.persist()
+    this.setState({ [name]: value }, () => {this.updateNewUser()})
+  }
+
+  //Working, called by handleChange, saves state data to newUser
+  updateNewUser = () => {
     this.setState({
-      [name]: value
+      newUser: {
+        name: `${this.state.fName} ${this.state.lName}`,
+        username: this.state.username,
+        password: this.state.password
+      }
     })
   }
 
-  //Not working, Used on Landing -> Login
+  // Working, Used on Nav -> SignUp
+  registerUser = () => {
+    axios.post('/api/users', this.state.newUser)
+      .then(res => {
+        this.setState({ 
+          User: res.data,
+          isLoggedIn: true
+        })
+      })
+      .catch(err => console.log(err.response.data.errMsg))
+  }
+
+  //Not working, Used on Nav -> Login
   loginUser = () => {
     this.setState({ isLoggedIn: true })
       //Use the below code when routes are working:
@@ -53,17 +75,7 @@ class Main extends Component {
     this.setState({ isLoggedIn: false })
   }
 
-  //Not working, Used on Landing -> SignUp
-  registerUser = () => {
-    this.setState({ User: {} }) //Clears User field to make ternary work properly
-    this.findUsername()
-    this.User !== {} ? 
-      axios.post('/api/userRoutes')
-        .then(this.loginUser()) //If true, POST and login
-        : alert('Sorry, that username is taken, please choose a different one!')  //If false, prompt user to choose a new username
-  }
-
-  //Working, Used on Landing to toggle login/signup displays
+  //Working, Used on Nav -> Login / SignUp  to toggle login/signup display
   displayToggle = (e) => {
     const { name } = e.target
     e.persist()
@@ -76,6 +88,7 @@ class Main extends Component {
     const props = {
       loginUser: this.loginUser,
       logoutUser: this.logoutUser,
+      registerUser: this.registerUser,
       handleChange: this.handleChange,
       displayToggle: this.displayToggle,
       ...this.state,

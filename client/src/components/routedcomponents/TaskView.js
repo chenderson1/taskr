@@ -1,7 +1,7 @@
 import React from 'react'
 import AddTask from './AddTask'
 
-const TaskView = () => {
+const TaskView = props => {
     const styles = {
         tempStyle: {
             border: '1px solid black'
@@ -9,6 +9,7 @@ const TaskView = () => {
     }
     return (
         <div style={styles.tempStyle}>
+            {props.User.username} <br></br>
             Here is where the tasks for each board will be displayed.
             <AddTask />
         </div>
