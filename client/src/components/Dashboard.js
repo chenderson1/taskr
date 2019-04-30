@@ -4,12 +4,12 @@ import TaskView from './routedcomponents/TaskView'
 import { StyledLoginButton, StyledFlexPage } from '../elements/index'
 
 const Dashboard = props => {
-    const styles = {
-        dashDiv: {
-          border: 'solid orchid 1px',
-          margin: '5px'
-        }
-      }
+    // const styles = {
+    //     dashDiv: {
+    //       border: 'solid orchid 1px',
+    //       margin: '5px'
+    //     }
+    //   }
     return (
         <StyledFlexPage>
             <StyledLoginButton onClick={props.logoutUser}>Log Out</StyledLoginButton>

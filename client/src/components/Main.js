@@ -96,7 +96,7 @@ class Main extends Component {
   }
   // NOT working - gets boards by user id
   getUserBoards = () => {
-    axios.get(`/api/boards/${this.state.userId}`).then(res => {
+    axios.get(`/api/boards/${this.state.userId}`).then(res => {
       const data = res.data;
       this.setState(ps => {
         return {
@@ -121,21 +121,11 @@ class Main extends Component {
       ...this.state
     };
     const styles = {
-<<<<<<< HEAD
-      mainDiv: {
-        border: "solid blue 1px",
-        margin: "5px",
-        display: "grid",
-        gridTemplateColumns: "auto auto"
-      }
-    };
-=======
           mainDiv: {
             display: 'grid',
             gridTemplateColumns: 'auto auto'
           }
         }
->>>>>>> 7169d56393682306b078a610f9a5656532c558ad
     return (
       <div>
         {this.state.isLoggedIn ? <Header {...props}/> : null}
