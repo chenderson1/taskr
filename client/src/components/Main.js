@@ -36,10 +36,9 @@ class Main extends Component {
     const { name, value } = e.target
     e.persist()
     this.setState({ [name]: value }, () => {this.updateNewUser()})
-    
   }
 
-  //Saves state data to newUser
+  //Working, called by handleChange, saves state data to newUser
   updateNewUser = () => {
     this.setState({
       newUser: {
@@ -50,7 +49,7 @@ class Main extends Component {
     })
   }
 
-  //Not working, Used on Nav -> SignUp
+  // Working, Used on Nav -> SignUp
   registerUser = () => {
     axios.post('/api/users', this.state.newUser)
       .then(res => {
@@ -75,8 +74,6 @@ class Main extends Component {
   logoutUser = () => {
     this.setState({ isLoggedIn: false })
   }
-
-  
 
   //Working, Used on Nav -> Login / SignUp  to toggle login/signup display
   displayToggle = (e) => {
