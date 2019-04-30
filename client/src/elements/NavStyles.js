@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 export const Base = styled.div`
-    min-height: 900px;
+    min-height: 700px;
     width: 230px;
 `;
 
@@ -10,5 +10,5 @@ export const StyledBase = styled(Base)`
     align-content: center;
     justify-content: center;
     padding: 10px;
-    background-color: #88d70a;
+    background-color: #40a700;
 `;

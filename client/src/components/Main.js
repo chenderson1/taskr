@@ -121,6 +121,7 @@ class Main extends Component {
       ...this.state
     };
     const styles = {
+<<<<<<< HEAD
       mainDiv: {
         border: "solid blue 1px",
         margin: "5px",
@@ -128,6 +129,13 @@ class Main extends Component {
         gridTemplateColumns: "auto auto"
       }
     };
+=======
+          mainDiv: {
+            display: 'grid',
+            gridTemplateColumns: 'auto auto'
+          }
+        }
+>>>>>>> 7169d56393682306b078a610f9a5656532c558ad
     return (
       <div>
         {this.state.isLoggedIn ? <Header {...props}/> : null}
