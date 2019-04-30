@@ -1,9 +1,9 @@
 import React from 'react'
-import DashHeader from './DashHeader'
-import Nav from './Nav'
-import Board from './Board'
+import TaskView from './routedcomponents/TaskView'
 
-const Dashboard = () => {
+import { StyledLoginButton, StyledFlexPage } from '../elements/index'
+
+const Dashboard = props => {
     const styles = {
         dashDiv: {
           border: 'solid orchid 1px',
@@ -11,12 +11,12 @@ const Dashboard = () => {
         }
       }
     return (
-        <div style={styles.dashDiv}>
-            Dashboard Filler
-            <DashHeader />
-            <Nav />
-            <Board />
-        </div>
+        <StyledFlexPage>
+            <StyledLoginButton onClick={props.logoutUser}>Log Out</StyledLoginButton>
+                <br></br> <br></br>
+              <TaskView />
+            
+        </StyledFlexPage>
     )
 }
 

@@ -1,20 +1,16 @@
 import React from 'react'
-import Login from './Login'
-import SignUp from './SignUp'
+import Login from './nav/Login'
+import SignUp from './nav/SignUp'
+import { StyledFlexPage } from '../elements/index'
+import Greeting from './routedcomponents/Greeting'
 
 const Landing = props => {
-    const styles = {
-        landingDiv: {
-          border: 'solid darkred 1px',
-          margin: '5px'
-        }
-      }
+    
     return (
-        <div style={styles.landingDiv}>
-            Landing Filler
-            <Login {...props} />
-            <SignUp {...props} />
-        </div>
+        <StyledFlexPage>
+            
+            <Greeting />
+        </StyledFlexPage>
     )
 }
 
