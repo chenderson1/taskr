@@ -4,7 +4,7 @@ const User = require("../models/user");
 
 const getBoardsByUserId = async (req, res, next) => {
   try {
-    const boards = await Board.find({ user: req.params._id });
+    const boards = await Board.find({ user: req.user._id });
     return res.status(200).send(boards);
   } catch (err) {
     res.status(500);
@@ -14,7 +14,10 @@ const getBoardsByUserId = async (req, res, next) => {
 
 const getBoardById = async (req, res, next) => {
   try {
-    const board = await Board.findOne({ _id: req.params._id });
+    const board = await Board.findOne({
+      _id: req.params._id,
+      user: req.user._id
+    });
     return res.status(200).send(board);
   } catch (err) {
     res.status(500);
@@ -26,15 +29,15 @@ const postBoard = async (req, res, next) => {
   try {
     //create new board from model
     const newBoard = new Board(req.body);
-    // user objId to board
+    // add user objId to board
     newBoard.user = mongoose.Types.ObjectId(req.params._id);
     //save new board to DB
     const board = await newBoard.save(newBoard);
-    // user.find one and update to  push board into boards array of Related User
+    // user.findoneandupdate to  push board into boards array of Related User
     const updatedUser = await User.findOneAndUpdate(
-      { _id: req.params._id },
+      { _id: req.user._id },
       { $push: { boards: mongoose.Types.ObjectId(board._id) } },
-      { returnNewDocument: true }
+      { new: true }
     );
     console.log(updatedUser.boards);
     return res.status(200).send(board);
@@ -47,10 +50,13 @@ const postBoard = async (req, res, next) => {
 const deleteBoard = async (req, res, next) => {
   try {
     //find and delete board
-    const board = await Board.findOneAndRemove({ _id: req.params._id });
+    const board = await Board.findOneAndRemove({
+      _id: req.params._id,
+      user: req.user._id
+    });
     //find related user and remove board from Boards array
     const updatedUser = await User.findOneAndUpdate(
-      { _id: board.user },
+      { _id: req.user._id },
       { $pull: { boards: mongoose.Types.ObjectId(board._id) } }
     );
     // console.log(updatedUser.boards, board._id);
