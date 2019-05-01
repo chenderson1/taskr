@@ -7,3 +7,12 @@
   text-align: center;
   font-family: "Ubuntu", sans-serif;
 }
+
+.fa-plus-square {
+  transition: linear 100ms all;
+}
+
+.fa-plus-square:hover {
+  text-shadow: 1px 1px black;
+  color: #339dd4;
+}

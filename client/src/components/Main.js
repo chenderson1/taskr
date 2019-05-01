@@ -35,17 +35,38 @@ class Main extends Component {
     //   .catch(err => console.log(err.response.data.errMsg))
   };
 
-  //Working, Used on Landing -> Login
-  //Saves user data to State
-  handleChange = e => {
-    const { name, value } = e.target;
-    e.persist();
-    this.setState({
-      [name]: value
-    });
-  };
+  //Working, Used on Nav -> Login / SignUp
+    //Saves user data to State, calls updateNewUser
+  handleChange = (e) => {
+    const { name, value } = e.target
+    e.persist()
+    this.setState({ [name]: value }, () => {this.updateNewUser()})
+  }
 
-  //Not working, Used on Landing -> Login
+  //Working, called by handleChange, saves state data to newUser
+  updateNewUser = () => {
+    this.setState({
+      newUser: {
+        name: `${this.state.fName} ${this.state.lName}`,
+        username: this.state.username,
+        password: this.state.password
+      }
+    })
+  }
+
+  // Working, Used on Nav -> SignUp
+  registerUser = () => {
+    axios.post('/api/users', this.state.newUser)
+      .then(res => {
+        this.setState({ 
+          User: res.data,
+          isLoggedIn: true
+        })
+      })
+      .catch(err => console.log(err.response.data.errMsg))
+  }
+
+  //Not working, Used on Nav -> Login
   loginUser = () => {
     this.setState({ isLoggedIn: true });
     //Use the below code when routes are working:
@@ -138,10 +159,15 @@ class Main extends Component {
     this.getUserBoards();
   }
 
+  addTask = () => {
+    
+  }
+
   render() {
     const props = {
       loginUser: this.loginUser,
       logoutUser: this.logoutUser,
+      registerUser: this.registerUser,
       handleChange: this.handleChange,
       boardHandleSubmit: this.boardHandleSubmit,
       displayToggle: this.displayToggle,

@@ -14,7 +14,7 @@ const SignUp = props => {
             <StyledLoginButton name='display' onClick={props.displayToggle}>
                 Back
             </StyledLoginButton>
-            <StyledLoginButton>
+            <StyledLoginButton onClick={props.registerUser}>
                 Sign Up
             </StyledLoginButton>
         </StyledLoginCard>
