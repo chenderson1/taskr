@@ -1,5 +1,6 @@
 import React from 'react'
 import taskr from '../../resources/taskr.png'
+import WhyTaskr from './WhyTaskr'
 
 const Greeting = () => {
     const styles = {
@@ -15,11 +16,13 @@ const Greeting = () => {
     return (
         <div>
             <img src={taskr} alt="dinosaur icon" style={styles.img}/>
-            <br></br><br></br>
+            
             <div style={styles.greetingDiv}>
-                Welcome! <br></br> Meet task'r, the task-eating taskosaurus-rex. <br></br>
+                Welcome! <br></br> Meet task'r, the taskosaurus-rex. <br></br>
                 He needs your help, task'r is very hungry - complete tasks so he can eat!
             </div>
+            <br></br><br></br>
+            <WhyTaskr />
         </div>
     )
 }

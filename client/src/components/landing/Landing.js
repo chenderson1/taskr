@@ -1,6 +1,6 @@
 import React from 'react'
-import { StyledFlexPage } from '../elements/index'
-import Greeting from './routedcomponents/Greeting'
+import { StyledFlexPage } from '../../elements/index'
+import Greeting from './Greeting'
 
 const Landing = props => {
     
