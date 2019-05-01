@@ -119,13 +119,14 @@ class Main extends Component {
     axios.put(`/api/boards/board/${boardToEdit._id}`, boardToEdit)
     .then(res => {
       console.log(res.data)
+      this.getUserBoards();
     })
   }
 
   // "Add Board" functionality
   boardHandleSubmit = boardName => {
     if(boardName._id){
-      this.editBoard(boardName)
+     return this.editBoard(boardName)
     }
     axios.post("/api/boards/5cc7adabc7f653c7458489ca", boardName).then(res => {
       console.log(res.data);
