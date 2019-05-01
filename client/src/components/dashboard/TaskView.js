@@ -36,7 +36,9 @@ class TaskView extends Component {
       }
     };
 
-    const mappedTasks = this.state.tasks.map( (task, i) => <Task {...task} key={i}/> );
+    const mappedTasks = this.state.tasks.map((task, i) => {
+       return <Task task={task} key={i}/> 
+    }) 
 
     return (
       <div style={styles.tempStyle}>
