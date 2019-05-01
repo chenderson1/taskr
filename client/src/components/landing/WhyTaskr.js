@@ -15,7 +15,7 @@ const WhyTaskr = () => {
             <StyledImg src={require('../../resources/superhero.jpg')}></StyledImg>
             <StyledImg src={require('../../resources/kids.jpg')}></StyledImg>
             <StyledInfo>
-                Executive functioning is responsible for a number of skills, including: <br></br> <br></br>
+                Executive functioning is responsible for many skills, including: <br></br> <br></br>
                 <ul> 
                     <li>Paying attention</li>
                     <li>Organizing, planning, and prioritizing</li>
@@ -25,8 +25,11 @@ const WhyTaskr = () => {
             <StyledInfo>
                 Having children do chores is one of the most effective methods of teaching these skills, and is also one of the top indicators of whether or not a child will be successful or not later in life.
             </StyledInfo>
-            <div></div>
-
+            <StyledImg src={require('../../resources/class.jpg')}></StyledImg>
+            <StyledImg src={require('../../resources/class.jpg')}></StyledImg>
+            <StyledInfo>
+            "If kids aren't doing the dishes, it means someone else is doing that for them, and so they're absolved of not only the work, but of learning that work has to be done and that each one of us must contribute for the betterment of the whole." <br></br>- Julie Lythcott-Haims, former Dean of Freshmen at Stanford University and author of 'How to Raise an Adult'
+            </StyledInfo>
         </StyledParentCard>
     )
 }
