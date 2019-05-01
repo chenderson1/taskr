@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Landing from './Landing'
-import Dashboard from './Dashboard'
+import Dashboard from './dashboard/Dashboard'
 import axios from 'axios'
 import Nav from './nav/Nav'
 
@@ -82,6 +82,10 @@ class Main extends Component {
     this.setState(prevState => ({
       [name]: !prevState.display
     }))
+  }
+
+  addTask = () => {
+    
   }
 
   render() {
