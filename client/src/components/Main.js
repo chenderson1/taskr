@@ -162,6 +162,11 @@ class Main extends Component {
     this.getUserBoards();
   }
 
+  displayTasks = boardId => {
+    // console.log(boardId)
+    this.setState({ selectedBoard : boardId })
+  }
+
   addTask = () => {
     
   }
@@ -178,6 +183,7 @@ class Main extends Component {
       deleteBoard: this.deleteBoard,
       updateBoard: this.updateBoard,
       editBoard: this.editBoard,
+      displayTasks: this.displayTasks,
       ...this.state
     };
     const styles = {

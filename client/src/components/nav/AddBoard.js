@@ -22,7 +22,7 @@ class AddBoard extends Component {
         this.setState({ name : value, _id: this.props.updateThisBoardId });
       };
     
-      handleSubmit = (e) => {
+      handleSubmit = e => {
         e.preventDefault()
         console.log(this.state)
         this.props.onSubmit(this.state)

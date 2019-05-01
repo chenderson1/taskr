@@ -5,7 +5,7 @@ import Login from "./Login";
 import SignUp from "./SignUp";
 
 const Nav = props => {
-  const { boardHandleSubmit, deleteBoard, updateBoard, updateThisBoard, isEdit, editBoard } = props;
+const { boardHandleSubmit, deleteBoard, updateBoard, updateThisBoard, isEdit, editBoard, displayTasks } = props;
   const { addBoard, boards } = props.User;
   return (
     <StyledBase>
@@ -17,6 +17,7 @@ const Nav = props => {
         )
       ) : (
         <BoardView
+          displayTasks={displayTasks}
           updateThisBoard={updateThisBoard}
           updateBoard={updateBoard}
           addBoard={addBoard}
@@ -25,6 +26,7 @@ const Nav = props => {
           deleteBoard={deleteBoard}
           onSubmit={boardHandleSubmit}
           onEdit={editBoard}
+
         />
       )}
     </StyledBase>

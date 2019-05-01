@@ -2,6 +2,7 @@ import React from 'react'
 import { StyledTaskCard, StyledH3, StyledSpan } from '../../elements/index'
 
 const Task = props => {
+    console.log(props)
     return (
         <StyledTaskCard>
            <StyledH3>Wash the dishes</StyledH3>{/* Replace with code below when props connected properly */}
