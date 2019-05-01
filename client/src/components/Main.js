@@ -3,7 +3,7 @@ import Landing from "./Landing";
 import Dashboard from "./Dashboard";
 import axios from "axios";
 import Nav from "./nav/Nav";
-import Header from './Header'
+import Header from "./Header";
 
 class Main extends Component {
   constructor() {
@@ -17,7 +17,11 @@ class Main extends Component {
       lName: "",
       display: true,
       quote: "",
-      User: {}
+      isEdit: false,
+      updateThisBoard: "",
+      User: {
+        boards: []
+      }
     };
   }
 
@@ -38,18 +42,6 @@ class Main extends Component {
     e.persist();
     this.setState({
       [name]: value
-    });
-  };
-
-  boardaHndleChange = e => {
-    const { value } = e.target;
-    e.persist();
-    this.setState(ps => {
-      return {
-        user: {
-          board: [value, ...ps.board]
-        }
-      }
     });
   };
 
@@ -85,31 +77,64 @@ class Main extends Component {
     }));
   };
 
-  // Works, gets the quote of the 
+  // Works, gets the quote of the
   // day and displays it in the header after login
   getQuote = () => {
-    axios.get('http://quotes.rest/qod.json')
-    .then(res => {
-      const quote = res.data.contents.quotes[0].quote
-      this.setState({quote: quote})
-    })
-  }
+    axios.get("http://quotes.rest/qod.json").then(res => {
+      const quote = res.data.contents.quotes[0].quote;
+      this.setState({ quote: quote });
+    });
+  };
   // NOT working - gets boards by user id
   getUserBoards = () => {
-    axios.get(`/api/boards/${this.state.userId}`).then(res => {
+    axios.get(`/api/boards/5cc7adabc7f653c7458489ca`).then(res => {
       const data = res.data;
       this.setState(ps => {
         return {
           User: {
-            boards: [data, ...ps.boards]
+            ...ps.User,
+            boards: data
           }
         };
       });
     });
+  };
+
+  deleteBoard = id => {
+    axios.delete(`/api/boards/board/${id}`);
+    this.getUserBoards();
+  };
+
+  updateBoard = id => {
+    const formToUpdate = this.state.User.boards.find(board => board._id === id);
+    this.setState(ps => {
+      return {
+        updateThisBoard: formToUpdate,
+        isEdit: !ps.isEdit
+      };
+    });
+  };
+
+  editBoard = boardToEdit => {
+    axios.put(`/api/boards/board/${boardToEdit._id}`, boardToEdit)
+    .then(res => {
+      console.log(res.data)
+    })
   }
-    componentDidMount() {
-     this.getQuote();
-     this.getUserBoards();
+
+  // "Add Board" functionality
+  boardHandleSubmit = boardName => {
+    if(boardName._id){
+      this.editBoard(boardName)
+    }
+    axios.post("/api/boards/5cc7adabc7f653c7458489ca", boardName).then(res => {
+      console.log(res.data);
+      this.getUserBoards();
+    });
+  };
+  componentDidMount() {
+    this.getQuote();
+    this.getUserBoards();
   }
 
   render() {
@@ -117,26 +142,31 @@ class Main extends Component {
       loginUser: this.loginUser,
       logoutUser: this.logoutUser,
       handleChange: this.handleChange,
+      boardHandleSubmit: this.boardHandleSubmit,
       displayToggle: this.displayToggle,
+      postUserBoards: this.postUserBoards,
+      deleteBoard: this.deleteBoard,
+      updateBoard: this.updateBoard,
+      editBoard: this.editBoard,
       ...this.state
     };
     const styles = {
-          mainDiv: {
-            display: 'grid',
-            gridTemplateColumns: 'auto auto'
-          }
-        }
+      mainDiv: {
+        display: "grid",
+        gridTemplateColumns: "auto auto"
+      }
+    };
     return (
       <div>
-        {this.state.isLoggedIn ? <Header {...props}/> : null}
-      <div style={styles.mainDiv}>
-        <Nav {...props} />
-        {this.state.isLoggedIn === false ? (
-          <Landing {...props} />
-        ) : (
-          <Dashboard {...props} />
-        )}
-      </div>
+        {this.state.isLoggedIn ? <Header {...props} /> : null}
+        <div style={styles.mainDiv}>
+          <Nav {...props} />
+          {this.state.isLoggedIn === false ? (
+            <Landing {...props} />
+          ) : (
+            <Dashboard {...props} />
+          )}
+        </div>
       </div>
     );
   }
