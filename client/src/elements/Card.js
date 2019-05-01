@@ -32,6 +32,19 @@ export const StyledLoginCard = styled(StyledCard)`
     
 `;
 
+export const StyledParentCard = styled.div`
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: auto auto auto;
+`;
+export const StyledInfo = styled.div`
+    text-align: left;
+`;
+
+export const StyledImg = styled.img`
+    height: 200px;
+`;
+
 export const StyledH3 = styled.h3`
     color: #ff7300;
     margin: 8px;

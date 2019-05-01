@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Landing from "./Landing";
-import Dashboard from "./Dashboard";
+import Dashboard from "./dashboard/Dashboard";
 import axios from "axios";
 import Nav from "./nav/Nav";
 import Header from "./Header";
@@ -16,12 +16,15 @@ class Main extends Component {
       fName: "",
       lName: "",
       display: true,
+      newUser: {},
+      User: {
+        boards: []
+      },
+      selectedBoard: '',
       quote: "",
       isEdit: false,
       updateThisBoard: "",
-      User: {
-        boards: []
-      }
+     
     };
   }
 
