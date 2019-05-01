@@ -10,10 +10,14 @@ export const StyledFlex = styled.div`
 export const StyledFlexPage = styled(StyledFlex)`
     background-color: #339dd4;
     padding: 20px;
-    font-family: 'Ubuntu', sans-serif;
     font-size: 26px;
     font-weight: bold;
-    align-content: center;
-    justify-content: center;
-    vertical-align: center;
+`;
+
+export const StyledTaskPage = styled(StyledFlexPage)`
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 20px;
 `;

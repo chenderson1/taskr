@@ -1,16 +1,16 @@
 import React from 'react'
 import TaskView from './TaskView'
+import QuoteFooter from './QuoteFooter'
 
-import { StyledLoginButton, StyledFlexPage } from '../../elements/index'
+import { StyledGridPage } from '../../elements/index'
 
 const Dashboard = props => {
+    
     return (
-        <StyledFlexPage>
-            <StyledLoginButton onClick={props.logoutUser}>Log Out</StyledLoginButton>
-                <br></br> <br></br>
+        <StyledGridPage>
               <TaskView {...props}/>
-            
-        </StyledFlexPage>
+            <QuoteFooter quote={props.quote}/>
+        </StyledGridPage>
     )
 }
 
