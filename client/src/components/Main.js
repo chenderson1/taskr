@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Landing from "./Landing";
+import Landing from "./landing/Landing";
 import Dashboard from "./dashboard/Dashboard";
 import axios from "axios";
 import Nav from "./nav/Nav";
