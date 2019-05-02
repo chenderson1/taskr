@@ -5,13 +5,15 @@ import AddTaskDisplay from './AddTaskDisplay'
 import AddTaskForm from './AddTaskForm'
 
 class AddTask extends Component {
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
         this.state = {
             formToggle: false,
             title: '',
             description: '',
-            newTask: {}
+            newTask: {
+                boardId: this.props.selectedBoard 
+            },
         }
     }
 
@@ -34,7 +36,7 @@ class AddTask extends Component {
     this.setState({
         newTask: {
             title: this.state.title,
-            description: this.state.description,
+            description: this.state.description
         }
         })
     }
@@ -48,6 +50,12 @@ class AddTask extends Component {
         })
       })
       .catch(err => console.log(err.response.data.errMsg))
+    }
+
+    componentDidUpdate(prevProps, prevState){
+        if(prevState.newTask.boardId !== this.props.selectedBoard){
+            this.setState({newTask: {boardId: this.props.selectedBoard}});
+        }
     }
 
     render() {

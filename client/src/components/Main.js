@@ -180,7 +180,10 @@ class Main extends Component {
     this.getUserBoards();
   }
 
-  addTask = () => {};
+  displayTasks = boardId => {
+    // console.log(boardId)
+    this.setState({ selectedBoard: boardId });
+  };
 
   render() {
     const props = {
@@ -194,6 +197,7 @@ class Main extends Component {
       deleteBoard: this.deleteBoard,
       updateBoard: this.updateBoard,
       editBoard: this.editBoard,
+      displayTasks: this.displayTasks,
       ...this.state
     };
     const styles = {
