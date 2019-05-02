@@ -7,6 +7,7 @@ const Task = props => {
             <StyledTaskCard>
                <StyledH3>{props.title}</StyledH3>{/* Replace with code below when task connected properly */}
                <StyledSpan>{props.description}</StyledSpan>
+                {/*<StyledSpan>{props.time}</StyledSpan>*/}
             </StyledTaskCard>
         )
     }
