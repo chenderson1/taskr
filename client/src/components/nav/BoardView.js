@@ -4,7 +4,7 @@ import Board from './Board';
 
 
 const BoardView = props => {
-    const { updateThisBoard, isEdit, onEdit } = props
+    const { updateThisBoard, isEdit, onEdit} = props
     const mappedBoards = props.boards.map((board, i) => {
         return <Board key={i} {...board} {...props}/>
     })
