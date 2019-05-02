@@ -3,7 +3,6 @@ import Landing from "./landing/Landing";
 import Dashboard from "./dashboard/Dashboard";
 import axios from "axios";
 import Nav from "./nav/Nav";
-import Header from "./Header";
 import { withData } from "../context/dataContext";
 const TaskrAxios = axios.create();
 
@@ -123,10 +122,10 @@ class Main extends Component {
       const quote = res.data.contents.quotes[0].quote;
       this.setState({ quote: quote });
     });
-  };
+}
   // NOT working - gets boards by user id
   getUserBoards = () => {
-    TaskrAxios.get(`/api/boards/5cc7adabc7f653c7458489ca`).then(res => {
+    TaskrAxios.get(`/api/boards/${this.props.user._id}`).then(res => {
       const data = res.data;
       this.setState(ps => {
         return {
@@ -137,7 +136,6 @@ class Main extends Component {
         };
       });
     });
-  // };
 };
 
   deleteBoard = id => {
@@ -169,16 +167,18 @@ class Main extends Component {
     if (boardName._id) {
       return this.editBoard(boardName);
     }
-    TaskrAxios.post("/api/boards/5cc7adabc7f653c7458489ca", boardName).then(
+    TaskrAxios.post(`/api/boards/${this.props.user._id}`, boardName).then(
       res => {
         console.log(res.data);
         this.getUserBoards();
       }
     );
   };
-  componentDidMount() {
+  componentDidMount(){
+    if(this.props.user._id){
+      this.getUserBoards();
+    }
     this.getQuote();
-    this.getUserBoards();
   }
 
   displayTasks = boardId => {

@@ -1,12 +1,12 @@
 import React from 'react'
-import { StyledHeader } from '../elements/index'
+import { StyledRibbon } from '../elements/index'
 
 const Header = (props) => {
     //styles can be updated + deleted after learning styling components
     const styles = {
         h1: {
-            marginBottom: '10px',
-            fontSize: '70px',
+            margin: '0 auto 30px auto',
+            fontSize: '80px',
             color: '#0c2716',
             display: 'inline-block',
         },
@@ -21,9 +21,9 @@ const Header = (props) => {
     }
     const { isLoggedIn, quote } = props
     return (
-        <StyledHeader>
-            <h1 style={styles.h1}>t a s k ' r</h1>
-        </StyledHeader>
+        <StyledRibbon>
+            {!isLoggedIn ? <h1 style={styles.h1}>t a s k ' r</h1> : <h1>{quote}</h1>}
+        </StyledRibbon>
     )
 }
 

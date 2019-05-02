@@ -3,17 +3,24 @@ import { StyledTaskCard } from '../../elements/Card'
 import axios from 'axios'
 import AddTaskDisplay from './AddTaskDisplay'
 import AddTaskForm from './AddTaskForm'
+const TaskrAxios = axios.create();
+
+TaskrAxios.interceptors.request.use(config => {
+  const token = localStorage.getItem("token");
+  config.headers.Authorization = `Bearer ${token}`;
+  return config;
+});
 
 class AddTask extends Component {
     constructor(props) {
         super(props)
         this.state = {
             formToggle: false,
-            title: '',
-            description: '',
             newTask: {
-                boardId: this.props.selectedBoard 
-            },
+                boardId: this.props.selectedBoard,
+                title: '',
+                description: ''
+            }
         }
     }
 
@@ -21,37 +28,40 @@ class AddTask extends Component {
     handleChange = (e) => {
         const { name, value } = e.target
         e.persist()
-        this.setState({ [name]: value }, () => {this.updateNewTask()})
+        this.setState(ps  => ({
+            newTask: { 
+                ...ps.newTask,
+                [name]: value 
+            }
+        }))
     }
 
     //Working, toggles display of AddTaskDisplay and AddTaskForm on AddTask component
     displayToggle = () => {
+        console.log(this.props.selectedBoard)
         this.setState(prevState => ({
           formToggle: !prevState.formToggle
         }))
     }
 
-    //Working, called by handleChange to save changes to newTask
+    // Working, called by handleChange to save changes to newTask
     updateNewTask = () => {
-    this.setState({
-        newTask: {
+    this.setState({ newTask: {
             title: this.state.title,
             description: this.state.description
-        }
+            }
         })
     }
 
-    //Not working, need to get boardID reference working
-    addNewTask = () => {
-        axios.post('/api/tasks', this.state.newTask)
-      .then(res => {
+    // Working
+    addTask = e => {
+        e.preventDefault()
+        this.props.onAdd(this.state.newTask)
         this.setState({ 
           formToggle: false
-        })
       })
-      .catch(err => console.log(err.response.data.errMsg))
     }
-
+    
     componentDidUpdate(prevProps, prevState){
         if(prevState.newTask.boardId !== this.props.selectedBoard){
             this.setState({newTask: {boardId: this.props.selectedBoard}});
@@ -62,7 +72,7 @@ class AddTask extends Component {
         const props = {
             handleChange: this.handleChange,
             displayToggle: this.displayToggle,
-            addNewTask: this.addNewTask,
+            addTask: this.addTask,
             updateNewTask: this.updateNewTask,
             ...this.state
         }

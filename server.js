@@ -26,7 +26,7 @@ mongoose.connect(
 //user login/signup routes
 app.use("/auth", require("./routes/auth"));
 //every /api route request jwt will verify token
-// app.use("/api", expressJwt({ secret: process.env.SECRET }));
+app.use("/api", expressJwt({ secret: process.env.SECRET }));
 //main resourse routes
 app.use("/api/users", userRoutes);
 app.use("/api/boards", boardRoutes);
