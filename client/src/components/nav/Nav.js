@@ -5,7 +5,7 @@ import Login from "./Login";
 import SignUp from "./SignUp";
 
 const Nav = props => {
-const { boardHandleSubmit, deleteBoard, updateBoard, updateThisBoard, isEdit, editBoard, displayTasks } = props;
+const { boardHandleSubmit, deleteBoard, updateBoard, updateThisBoard, isEdit, editBoard, displayTasks, userId } = props;
   const { addBoard, boards } = props.User;
   return (
     <StyledBase>
@@ -26,7 +26,7 @@ const { boardHandleSubmit, deleteBoard, updateBoard, updateThisBoard, isEdit, ed
           deleteBoard={deleteBoard}
           onSubmit={boardHandleSubmit}
           onEdit={editBoard}
-
+          userId={userId}
         />
       )}
     </StyledBase>

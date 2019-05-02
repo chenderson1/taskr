@@ -111,7 +111,8 @@ class Main extends Component {
   };
   // NOT working - gets boards by user id
   getUserBoards = () => {
-    axios.get(`/api/boards/5cc7adabc7f653c7458489ca`).then(res => {
+    // if(this.state.userId){
+    axios.get(`/api/boards/${this.state.userId}`).then(res => {
       const data = res.data;
       this.setState(ps => {
         return {
@@ -122,7 +123,8 @@ class Main extends Component {
         };
       });
     });
-  };
+  // };
+};
 
   deleteBoard = id => {
     axios.delete(`/api/boards/board/${id}`);
