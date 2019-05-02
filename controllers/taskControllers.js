@@ -5,7 +5,10 @@ const Board = require("../models/board");
 
 const getTasksByBoardId = async (req, res, next) => {
   try {
-    const tasks = await Task.find({ board: req.params._id });
+    const tasks = await Task.find({
+      board: req.params._id,
+      user: req.user._id
+    });
     return res.status(200).send(tasks);
   } catch (err) {
     res.status(500);
@@ -15,7 +18,10 @@ const getTasksByBoardId = async (req, res, next) => {
 
 const getTaskById = async (req, res, next) => {
   try {
-    const task = await Task.findOne({ _id: req.params._id });
+    const task = await Task.findOne({
+      _id: req.params._id,
+      user: req.user._id
+    });
     return res.status(200).send(task);
   } catch (err) {
     res.status(500);
@@ -39,9 +45,9 @@ const postTask = async (req, res, next) => {
     //create task in DB
     const task = await newTask.save(newTask);
 
-    //board.find oneAndUpdate to  push task into tasks array
+    //board.findoneAndUpdate to  push task into tasks array
     const updatedBoard = await Board.findOneAndUpdate(
-      { _id: req.params._id },
+      { _id: req.params._id, user: req.user._id },
       { $push: { tasks: mongoose.Types.ObjectId(task._id) } },
       { returnNewDocument: true }
     );
@@ -56,7 +62,8 @@ const postTask = async (req, res, next) => {
 const editTask = async (req, res, next) => {
   try {
     const updatedTask = await Task.findOneAndUpdate(
-      { _id: req.params._id },
+      //also query check against userObj
+      { _id: req.params._id, user: req.user._id },
       req.body,
       { new: true }
     );
@@ -73,7 +80,8 @@ const deleteTask = async (req, res, next) => {
     const task = await Task.findOneAndRemove({ _id: req.params._id });
     //find related Board and remove task from tasks array
     const updatedBoard = await Board.findOneAndUpdate(
-      { _id: task.board },
+      //also query check against userObj
+      { _id: task.board, user: req.user._id },
       { $pull: { tasks: mongoose.Types.ObjectId(task._id) } }
     );
     // console.log(updatedBoard.tasks, task._id) task._id should be removed

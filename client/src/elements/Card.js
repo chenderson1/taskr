@@ -21,9 +21,8 @@ export const StyledTaskCard = styled(StyledCard)`
 export const StyledLoginCard = styled(StyledCard)`
     font-family: 'Ubuntu', sans-serif;
     border-radius: 15px;
-    margin-top: auto;
+    margin-top: 20px;
     margin-bottom: auto;
-    
     padding: 10px;
     color: black;
     font-size: 22px;
@@ -35,14 +34,27 @@ export const StyledLoginCard = styled(StyledCard)`
 export const StyledParentCard = styled.div`
     display: grid;
     grid-template-columns: 50% 50%;
-    grid-template-rows: auto auto auto;
+    grid-template-rows: auto auto auto auto;
+    justify-content: center;
+    align-content: center;
+    grid-gap: 10px;
+    border-top: darkslategray 2px solid;
+    padding-top: 20px;
 `;
+
+export const StyledTaskTile = styled.div`
+
+`;
+
+
 export const StyledInfo = styled.div`
     text-align: left;
+    padding: 10px;
 `;
 
 export const StyledImg = styled.img`
     height: 200px;
+    margin: auto;
 `;
 
 export const StyledH3 = styled.h3`

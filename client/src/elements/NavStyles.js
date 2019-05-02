@@ -11,4 +11,5 @@ export const StyledBase = styled(Base)`
     justify-content: center;
     padding: 10px;
     background-color: #40a700;
+    border-right: solid 1px darkslategray;
 `;

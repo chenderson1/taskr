@@ -189,12 +189,11 @@ class Main extends Component {
     const styles = {
       mainDiv: {
         display: "grid",
-        gridTemplateColumns: "auto auto"
+        gridTemplateColumns: "230px auto"
       }
     };
     return (
       <div>
-        {this.state.isLoggedIn ? <Header {...props} /> : null}
         <div style={styles.mainDiv}>
           <Nav {...props} />
           {this.state.isLoggedIn === false ? (

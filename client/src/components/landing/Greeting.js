@@ -22,7 +22,6 @@ const Greeting = () => {
                 He needs your help, task'r is very hungry - complete tasks so he can eat!
             </div>
             <br></br><br></br>
-            <br></br><br></br>
             <WhyTaskr />
         </div>
     )
