@@ -18,7 +18,7 @@ class TaskView extends Component {
       console.log(data)
       this.setState(ps => {
         return {
-          tasks: [data, ...ps.tasks]
+          tasks: [...data, ...ps.tasks]
         };
       });
     });
@@ -37,9 +37,9 @@ class TaskView extends Component {
     };
 
     const mappedTasks = this.state.tasks.map((task, i) => {
-       return <Task task={task} key={i}/> 
+       return <Task {...task} key={i}/> 
     }) 
-
+    console.log(mappedTasks)
     return (
       <div style={styles.tempStyle}>
         {this.props.User.username} <br />
