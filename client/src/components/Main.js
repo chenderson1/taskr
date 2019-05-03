@@ -4,7 +4,7 @@ import Dashboard from "./dashboard/Dashboard";
 import axios from "axios";
 import Nav from "./nav/Nav";
 import Header from "./Header";
-import { withData } from "../context/dataContext";
+import { withUserData } from "../context/userDataContext";
 const TaskrAxios = axios.create();
 
 TaskrAxios.interceptors.request.use(config => {
@@ -54,14 +54,6 @@ class Main extends Component {
         username: this.state.username,
         password: this.state.password
       }
-    });
-  };
-
-  clearInputs = () => {
-    this.setState({
-      username: "",
-      password: "",
-      errorMessage: ""
     });
   };
 
@@ -116,6 +108,7 @@ class Main extends Component {
       isEdit: false,
       updateThisBoard: ""
     });
+    console.log(res);
   };
 
   //Working, Used on Landing to toggle login/signup displays
@@ -135,6 +128,7 @@ class Main extends Component {
       this.setState({ quote: quote });
     });
   };
+
   // NOT working - gets boards by user id
   getUserBoards = () => {
     TaskrAxios.get(`/api/boards/5cc7adabc7f653c7458489ca`).then(res => {
@@ -186,6 +180,7 @@ class Main extends Component {
       }
     );
   };
+
   componentDidMount() {
     this.getQuote();
     this.getUserBoards();
@@ -232,4 +227,4 @@ class Main extends Component {
   }
 }
 
-export default withData(Main);
+export default withUserData(Main);

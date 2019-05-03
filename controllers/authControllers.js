@@ -32,11 +32,12 @@ const login = async (req, res, next) => {
     const user = await User.findOne({
       username: req.body.username.toLowerCase()
     });
-    //check if user doesnt exist or the passwords dont match
+    //check if username exist in DB
     if (!user) {
       res.status(403);
-      return next(new Error("Login Username or password are incorrect"));
+      return next(new Error("No user by that username"));
     }
+    //compare password function
     user.checkPassword(req.body.password, (err, match) => {
       if (err) return res.status(500).send(err);
       if (!match)
@@ -44,6 +45,7 @@ const login = async (req, res, next) => {
           success: false,
           message: "Password is incorrect"
         });
+      //send token with userObj stripped of password
       const token = jwt.sign(user.withoutPassword(), process.env.SECRET);
       return res.send({
         token: token,
