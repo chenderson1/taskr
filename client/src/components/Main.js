@@ -131,7 +131,7 @@ class Main extends Component {
 
   // NOT working - gets boards by user id
   getUserBoards = () => {
-    TaskrAxios.get(`/api/boards/5cc7adabc7f653c7458489ca`).then(res => {
+    TaskrAxios.get(`/api/boards/${this.props.user._id}`).then(res => {
       const data = res.data;
       this.setState(ps => {
         return {
@@ -142,7 +142,7 @@ class Main extends Component {
         };
       });
     });
-  };
+};
 
   deleteBoard = id => {
     TaskrAxios.delete(`/api/boards/board/${id}`);
@@ -173,22 +173,27 @@ class Main extends Component {
     if (boardName._id) {
       return this.editBoard(boardName);
     }
-    TaskrAxios.post("/api/boards/5cc7adabc7f653c7458489ca", boardName).then(
+    TaskrAxios.post(`/api/boards/${this.props.user._id}`, boardName).then(
       res => {
         console.log(res.data);
         this.getUserBoards();
       }
     );
   };
-
-  componentDidMount() {
+  componentDidMount(){
+    if(this.props.user._id){
+      this.getUserBoards();
+    }
     this.getQuote();
-    this.getUserBoards();
   }
 
   displayTasks = boardId => {
     // console.log(boardId)
-    this.setState({ selectedBoard: boardId });
+    this.setState(ps => { 
+      return {
+        selectedBoard: boardId
+      }  
+    });
   };
 
   render() {

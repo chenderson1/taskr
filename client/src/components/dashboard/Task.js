@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyledTaskCard, StyledH3, StyledSpan } from '../../elements/index'
+import { StyledTaskCard, StyledH3, StyledSpan, StyledBoardButton } from '../../elements/index'
 
 const Task = props => {
     console.log(props)
@@ -8,6 +8,9 @@ const Task = props => {
                <StyledH3>{props.title}</StyledH3>{/* Replace with code below when task connected properly */}
                <StyledSpan>{props.description}</StyledSpan>
                 {/*<StyledSpan>{props.time}</StyledSpan>*/}
+                <StyledBoardButton onClick={() => props.findTaskToDelete(props._id)}>delete</StyledBoardButton>
+                <StyledBoardButton onClick={() => props.updateTask(props._id)}>update</StyledBoardButton>
+               <input type="checkbox" name="completed"/>
             </StyledTaskCard>
         )
     }
