@@ -183,7 +183,11 @@ class Main extends Component {
 
   displayTasks = boardId => {
     // console.log(boardId)
-    this.setState({ selectedBoard: boardId });
+    this.setState(ps => { 
+      return {
+        selectedBoard: boardId
+      }  
+    });
   };
 
   render() {

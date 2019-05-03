@@ -18,9 +18,15 @@ class AddTask extends Component {
             formToggle: false,
             newTask: {
                 boardId: this.props.selectedBoard,
-                title: '',
-                description: ''
+                title: this.props.taskToUpdateTitle ? this.props.taskToUpdateTitle : '',
+                description: this.props.taskToUpdateDescription ? this.props.taskToUpdateDescription : ''
             }
+        }
+    }
+
+    updateFormToggle = () => {
+        if(this.props.taskToUpdateTitle){
+            this.setState({ formToggle : true })
         }
     }
 
@@ -58,7 +64,11 @@ class AddTask extends Component {
         e.preventDefault()
         this.props.onAdd(this.state.newTask)
         this.setState({ 
-          formToggle: false
+          formToggle: false,
+          newTask: {
+              title: '',
+              description: ''
+          }
       })
     }
     

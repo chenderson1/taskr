@@ -14,8 +14,7 @@ class TaskView extends Component {
   constructor() {
     super();
     this.state = {
-      tasks: [],
-      taskToDelete: ''
+      tasks: []
     };
   }
   getSpecificTasks = () => {
@@ -26,7 +25,8 @@ class TaskView extends Component {
       console.log(data)
       this.setState(ps => {
         return {
-          tasks: [...data]
+          tasks: [...data],
+          taskToUpdate: []
         };
       });
     });
@@ -42,13 +42,19 @@ class TaskView extends Component {
  
 
   addNewTask = taskToAdd => {
-      console.log(taskToAdd)
   TaskrAxios.post(`/api/tasks/${this.props.selectedBoard}`, taskToAdd)
       .then(res => {
           console.log(res.data)
           this.getSpecificTasks()
       })
       .catch(err => console.log(err.response.data.errMsg))
+    }
+
+    updateTask = taskId => {
+        const taskUpdate = this.state.tasks.find(task => task._id === taskId)
+        console.log(taskUpdate)
+        this.setState({ taskToUpdate: taskUpdate })
+        console.log(this.state)
     }
 
   componentDidUpdate(prevProps){
@@ -65,13 +71,13 @@ class TaskView extends Component {
     };
 
     const mappedTasks = this.state.tasks.map((task, i) => {
-       return <Task {...task} key={i} findTaskToDelete={this.findTaskToDelete}/> 
+       return <Task {...task} key={i} findTaskToDelete={this.findTaskToDelete} updateTask={this.updateTask}/> 
     }) 
     return (
       <div style={styles.tempStyle}>
         {this.props.User.username} <br></br>
         {mappedTasks}
-        <AddTask selectedBoard={this.props.selectedBoard} onAdd={this.addNewTask}/>
+        <AddTask selectedBoard={this.props.selectedBoard} onAdd={this.addNewTask}/> {/*taskToUpdateTitle={this.state.taskToUpdate.title} taskToUpdateDescription={this.state.taskToUpdate.description}/>*/}
       </div>
     );
   }

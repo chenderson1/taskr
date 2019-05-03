@@ -9,7 +9,8 @@ const Task = props => {
                <StyledSpan>{props.description}</StyledSpan>
                 {/*<StyledSpan>{props.time}</StyledSpan>*/}
                 <StyledBoardButton onClick={() => props.findTaskToDelete(props._id)}>delete</StyledBoardButton>
-                <StyledBoardButton>update</StyledBoardButton>
+                <StyledBoardButton onClick={() => props.updateTask(props._id)}>update</StyledBoardButton>
+               <input type="checkbox" name="completed"/>
             </StyledTaskCard>
         )
     }
