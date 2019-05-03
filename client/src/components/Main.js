@@ -23,6 +23,7 @@ class Main extends Component {
       userId: "",
       fName: "",
       lName: "",
+      errorMessage: "",
       display: true,
       newUser: {},
       User: {
@@ -56,6 +57,14 @@ class Main extends Component {
     });
   };
 
+  clearInputs = () => {
+    this.setState({
+      username: "",
+      password: "",
+      errorMessage: ""
+    });
+  };
+
   // Working, Used on Nav -> SignUp
   registerUser = async e => {
     e.preventDefault();
@@ -66,6 +75,7 @@ class Main extends Component {
         isLoggedIn: true
       });
     } catch (err) {
+      this.setState({ errorMessage: err });
       console.log(err);
     }
   };
@@ -73,17 +83,18 @@ class Main extends Component {
   //working, Used on Nav -> Login
   loginUser = async e => {
     e.preventDefault();
-    const { username, password } = this.state;
-    const res = await this.props.login({
-      username: username,
-      password: password
-    });
-    console.log(res.data);
-    this.setState({ isLoggedIn: true });
-    //Use the below code when routes are working:
-    // this.findUsername()
-    // this.state.User.password === this.state.password ? this.setState({ isLoggedIn: true}) : this.setState({ isLoggedIn: false })
-    //If true, saves User data to state and changes loggedIn to true
+    try {
+      const { username, password } = this.state;
+      const res = await this.props.login({
+        username: username,
+        password: password
+      });
+      console.log(res.data);
+      this.setState({ isLoggedIn: true });
+    } catch (err) {
+      this.setState({ errorMessage: err });
+      console.log(err);
+    }
   };
 
   logoutUser = async () => {

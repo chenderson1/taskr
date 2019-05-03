@@ -33,14 +33,24 @@ const login = async (req, res, next) => {
       username: req.body.username.toLowerCase()
     });
     //check if user doesnt exist or the passwords dont match
-    if (!user || user.password !== req.body.password) {
+    if (!user) {
       res.status(403);
-      return next(new Error("Email or password are incorrect"));
+      return next(new Error("Login Username or password are incorrect"));
     }
-    //create token, with userObj as the payload and encrypt token with secret
-    const token = jwt.sign(user.toObject(), process.env.SECRET);
-    //send token and userObj back
-    return res.send({ token: token, user: user.toObject(), success: true });
+    user.checkPassword(req.body.password, (err, match) => {
+      if (err) return res.status(500).send(err);
+      if (!match)
+        res.status(401).send({
+          success: false,
+          message: "Password is incorrect"
+        });
+      const token = jwt.sign(user.withoutPassword(), process.env.SECRET);
+      return res.send({
+        token: token,
+        user: user.withoutPassword(),
+        success: true
+      });
+    });
   } catch (err) {
     res.status(500);
     next(err);
