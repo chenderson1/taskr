@@ -4,7 +4,7 @@ import axios from "axios";
 export const { Provider, Consumer } = React.createContext();
 
 //set state to userObj and token from current user session or initialize
-export class DataProvider extends Component {
+export class UserDataProvider extends Component {
   state = {
     user: JSON.parse(localStorage.getItem("user")) || {},
     token: localStorage.getItem("token") || ""
@@ -66,8 +66,8 @@ export class DataProvider extends Component {
   }
 }
 
-export default DataProvider;
+export default UserDataProvider;
 
-export const withData = C => props => (
+export const withUserData = C => props => (
   <Consumer>{value => <C {...value} {...props} />}</Consumer>
 );
