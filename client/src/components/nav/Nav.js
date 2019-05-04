@@ -1,15 +1,22 @@
 import React from "react";
-import { StyledBase } from "../../elements/index";
+import { StyledBase, StyledLogoutButton } from "../../elements/index";
 import BoardView from "./BoardView";
 import Login from "./Login";
 import SignUp from "./SignUp";
 
 const Nav = props => {
-const { boardHandleSubmit, deleteBoard, updateBoard, updateThisBoard, isEdit, editBoard, displayTasks, userId, highLight, selectedBoard } = props;
+const { boardHandleSubmit, deleteBoard, updateBoard, updateThisBoard, isEdit, editBoard, displayTasks, userId, highLight, selectedBoard, token, logoutUser } = props;
   const { addBoard, boards } = props.User;
+  const styles = {
+    div:{
+      backgroundColor: '#40a700',
+      borderLeft: '1px solid slategray'
+    } 
+  }
   return (
+    <div style={styles.div}>
     <StyledBase>
-      {props.isLoggedIn === false ? (
+      {!token ? (
         props.display === true ? (
           <Login {...props} />
         ) : (
@@ -32,6 +39,8 @@ const { boardHandleSubmit, deleteBoard, updateBoard, updateThisBoard, isEdit, ed
         />
       )}
     </StyledBase>
+      {token && <StyledLogoutButton onClick={logoutUser}>logout</StyledLogoutButton>}<br></br>
+      </div>
   );
 };
 
