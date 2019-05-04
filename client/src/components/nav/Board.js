@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { StyledBoardButton } from '../../elements/Buttons'
-import { StyledBoard, HighLightedBoard } from '../../elements/StyledBoard'
+import { StyledBoard } from '../../elements/StyledBoard'
 
 class Board extends Component {
     constructor(){
@@ -35,7 +35,7 @@ componentDidUpdate(){
         }}>
                 <h1>{name}</h1><br></br>
             <StyledBoardButton onClick={() => updateBoard(_id)}>update</StyledBoardButton>
-            <StyledBoardButton onClick={() => deleteBoard(_id)}>Delete</StyledBoardButton>
+            <StyledBoardButton onClick={() => deleteBoard(_id)}>delete</StyledBoardButton>
         </StyledBoard>
     )
     }
