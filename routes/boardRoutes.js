@@ -2,6 +2,7 @@ const { Router } = require("express");
 const {
   getBoardById,
   getBoardsByUserId,
+  editBoard,
   postBoard,
   deleteBoard
 } = require("../controllers/boardControllers");
@@ -17,6 +18,7 @@ boardRoutes
 //get, delete individual Board by _id
 boardRoutes
   .route("/board/:_id")
+  .put(editBoard)
   .get(getBoardById)
   .delete(deleteBoard);
 

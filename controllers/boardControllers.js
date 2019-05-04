@@ -24,6 +24,20 @@ const getBoardById = async (req, res, next) => {
     next(err);
   }
 };
+const editBoard = async (req, res, next) => {
+  try {
+    const updatedBoard = await Board.findOneAndUpdate(
+      //also query check against userObj
+      { _id: req.params._id, user: req.user._id },
+      req.body,
+      { new: true }
+    );
+    return res.status(200).send(updatedBoard);
+  } catch (err) {
+    res.status(500);
+    next(err);
+  }
+};
 
 const postBoard = async (req, res, next) => {
   try {
@@ -73,5 +87,6 @@ module.exports = {
   getBoardById,
   getBoardsByUserId,
   postBoard,
+  editBoard,
   deleteBoard
 };
