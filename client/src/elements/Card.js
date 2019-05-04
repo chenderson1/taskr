@@ -10,7 +10,7 @@ export const StyledTaskCard = styled(StyledCard)`
   background-color: #fefffa;
   margin: 5px;
   padding: 5px;
-  min-width: 100px;
+  min-width: 600px;
   min-height: 100px;
   display: flex;
   flex-flow: column wrap;
