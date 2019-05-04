@@ -88,8 +88,8 @@ class Main extends Component {
     }
   };
 
-  logoutUser = async () => {
-    const res = await this.props.logout();
+  logoutUser = () => {
+    const res = 
     this.setState({
       isLoggedIn: false,
       username: "",
@@ -106,7 +106,7 @@ class Main extends Component {
       quote: "",
       isEdit: false,
       updateThisBoard: ""
-    });
+    }, () => this.props.logout());
     console.log(res);
   };
 
@@ -208,6 +208,7 @@ class Main extends Component {
       updateBoard: this.updateBoard,
       editBoard: this.editBoard,
       displayTasks: this.displayTasks,
+      token: this.props.token,
       ...this.state
     };
     const styles = {
@@ -220,7 +221,7 @@ class Main extends Component {
       <div>
         <div style={styles.mainDiv}>
           <Nav {...props} />
-          {this.state.isLoggedIn === false ? (
+          {!this.props.token ? (
             <Landing {...props} />
           ) : (
             <Dashboard {...props} />
