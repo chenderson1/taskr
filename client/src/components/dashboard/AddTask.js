@@ -16,6 +16,7 @@ class AddTask extends Component {
         super(props)
         this.state = {
             formToggle: false,
+            isEdit: false,
             newTask: {
                 boardId: this.props.selectedBoard,
                 title: this.props.taskToUpdateTitle ? this.props.taskToUpdateTitle : '',
@@ -26,12 +27,12 @@ class AddTask extends Component {
 
     updateFormToggle = () => {
         if(this.props.taskToUpdateTitle){
-            this.setState({ formToggle : true })
+            this.setState({ formToggle : true, isEdit: true, newTask:{ title: this.props.taskToUpdateTitle, description: this.props.taskToUpdateDescription }})
         }
     }
 
     //Working, used on AddTaskForm to save changes to state
-    handleChange = (e) => {
+    handleChange = e => {
         const { name, value } = e.target
         e.persist()
         this.setState(ps  => ({
@@ -44,9 +45,9 @@ class AddTask extends Component {
 
     //Working, toggles display of AddTaskDisplay and AddTaskForm on AddTask component
     displayToggle = () => {
-        console.log(this.props.selectedBoard)
         this.setState(prevState => ({
-          formToggle: !prevState.formToggle
+          formToggle: !prevState.formToggle,
+          isEdit: false
         }))
     }
 
@@ -62,19 +63,27 @@ class AddTask extends Component {
     // Working
     addTask = e => {
         e.preventDefault()
-        this.props.onAdd(this.state.newTask)
         this.setState({ 
           formToggle: false,
+          isEdit: false,
           newTask: {
               title: '',
               description: ''
           }
       })
+        if(this.state.isEdit){
+            this.props.onUpdate(this.state.newTask)
+            this.setState({isEdit: false})
+        } else {
+        this.props.onAdd(this.state.newTask)
     }
+}
     
     componentDidUpdate(prevProps, prevState){
         if(prevState.newTask.boardId !== this.props.selectedBoard){
             this.setState({newTask: {boardId: this.props.selectedBoard}});
+        } if(prevProps.taskToUpdateDescription !== this.props.taskToUpdateDescription){
+            this.updateFormToggle()
         }
     }
 
@@ -84,6 +93,8 @@ class AddTask extends Component {
             displayToggle: this.displayToggle,
             addTask: this.addTask,
             updateNewTask: this.updateNewTask,
+            taskToUpdateTitle: this.props.taskToUpdateTitle,
+            taskToUpdateDescription: this.props.taskToUpdateDescription,
             ...this.state
         }
         return (

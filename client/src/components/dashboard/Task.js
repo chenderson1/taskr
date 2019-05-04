@@ -1,8 +1,7 @@
 import React from 'react'
 import { StyledTaskCard, StyledH3, StyledSpan, StyledBoardButton } from '../../elements/index'
 
-const Task = props => {
-    console.log(props)
+const Task = props => { 
         return (
             <StyledTaskCard>
                <StyledH3>{props.title}</StyledH3>{/* Replace with code below when task connected properly */}
@@ -14,6 +13,7 @@ const Task = props => {
             </StyledTaskCard>
         )
     }
+
 
 export default Task
 

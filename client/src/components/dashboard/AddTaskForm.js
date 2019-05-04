@@ -1,7 +1,6 @@
 import React from 'react'
 
 const AddTaskForm = props => {
-    console.log(props)
     return (
         <div>
             Title: <input name='title' onChange={props.handleChange} value={props.newTask.title}></input>
@@ -11,4 +10,4 @@ const AddTaskForm = props => {
     )
 }
 
-export default AddTaskForm
+export default AddTaskForm 
