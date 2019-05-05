@@ -14,7 +14,11 @@ export const StyledFlexPage = styled(StyledFlex)`
     font-weight: bold;
 `;
 
-export const StyledTaskPage = styled(StyledFlexPage)`
+export const StyledTaskPage = styled.div`
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+    align-content: flex-start;
     position: absolute;
     top: 0;
     right: 0;

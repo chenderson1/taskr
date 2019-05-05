@@ -81,7 +81,7 @@ class Main extends Component {
         password: password
       });
       console.log(res.data);
-      this.setState({ isLoggedIn: true });
+      this.setState({ isLoggedIn: true }, () => {this.updateNewUser()} ); //Board data not automatically rendering, using forceUpdate
     } catch (err) {
       this.setState({ errorMessage: err });
       console.log(err);
@@ -122,7 +122,7 @@ class Main extends Component {
   // Works, gets the quote of the
   // day and displays it in the header after login
   getQuote = () => {
-    TaskrAxios.get("http://quotes.rest/qod.json").then(res => {
+    axios.get("http://quotes.rest/qod.json").then(res => {
       const quote = res.data.contents.quotes[0].quote;
       this.setState({ quote: quote });
     });
@@ -179,6 +179,7 @@ class Main extends Component {
       }
     );
   };
+  
   componentDidMount(){
     if(this.props.user._id){
       this.getUserBoards();

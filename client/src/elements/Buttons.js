@@ -22,15 +22,15 @@ export const StyledLoginButton = styled(StyledButton)`
 `;
 export const StyledLogoutButton = styled(StyledButton)`
     background-color: #fea42a;
-    margin: 5px;
+    
+    margin-top: auto;
     font-family: 'Ubuntu', sans-serif;
     font-size: 16px;
     margin-top: 10px;
     margin-bottom: 10px;
     height: 30px;
     border: 1px solid #88D70A;
-    position: relative;
-    float: bottom;
+    
 `;
 
 export const StyledBoardButton = styled(StyledButton)`
@@ -41,4 +41,18 @@ export const StyledBoardButton = styled(StyledButton)`
     font-size: 16px;
     margin-bottom: 10px;
     height: 20px;
+`;
+
+export const StyledIconDiv = styled.div`
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    color: #fea42a;
+    text-shadow: black 1px 1px;
+`;
+
+export const StyledBoardIconDiv = styled(StyledIconDiv)`
+    justify-content: space-evenly;
+    margin-bottom: 2px;
+    text-shadow: black 1px 1px;
 `;

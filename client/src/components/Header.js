@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyledRibbon } from '../elements/index'
+import { StyledHeader } from '../elements/index'
 
 const Header = (props) => {
     //styles can be updated + deleted after learning styling components
@@ -21,9 +21,9 @@ const Header = (props) => {
     }
     const { isLoggedIn, quote } = props
     return (
-        <StyledRibbon>
+        <StyledHeader>
             {!isLoggedIn ? <h1 style={styles.h1}>t a s k ' r</h1> : <h1>{quote}</h1>}
-        </StyledRibbon>
+        </StyledHeader>
     )
 }
 

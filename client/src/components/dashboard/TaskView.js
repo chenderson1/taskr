@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import AddTask from "./AddTask";
 import Task from "./Task";
 import axios from "axios";
+import { StyledTaskPage } from '../../elements/index'
 const TaskrAxios = axios.create();
 
 TaskrAxios.interceptors.request.use(config => {
@@ -69,12 +70,6 @@ class TaskView extends Component {
   }
 
   render() {
-    const styles = {
-      tempStyle: {
-        border: "1px solid black"
-      }
-    };
-
     const mappedTasks = this.state.tasks.map((task, i) => {
       return (
         <Task
@@ -86,7 +81,7 @@ class TaskView extends Component {
       );
     });
     return (
-      <div style={styles.tempStyle}>
+      <StyledTaskPage>
         {this.props.User.username} <br />
         {mappedTasks}
         <AddTask
@@ -97,7 +92,7 @@ class TaskView extends Component {
           taskToUpdateTitle={this.state.taskToUpdate.title}
           taskToUpdateDescription={this.state.taskToUpdate.description}
         />
-      </div>
+      </StyledTaskPage>
     );
   }
 }

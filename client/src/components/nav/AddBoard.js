@@ -1,14 +1,21 @@
 import React, { Component } from "react";
-import { StyledLoginButton } from "../../elements/index";
+import { StyledLoginButton, StyledAddBoard } from "../../elements/index";
 
 class AddBoard extends Component {
     constructor(props) {
         super(props);
         this.state = {
             name: this.props.updateThisBoardName ? this.props.updateThisBoardName : '',
-            _id: this.props.updateThisBoardId ? this.props.updateThisBoardId : '' 
+            _id: this.props.updateThisBoardId ? this.props.updateThisBoardId : '',
+            display: true, 
         }
     }
+
+    toggle = () => {
+      this.setState(prevState => ({
+          display: !prevState.display
+      }))
+  }
 
     componentDidUpdate(prevProps, prevState){
         if(prevProps.updateThisBoardName !== this.props.updateThisBoardName){
@@ -29,27 +36,24 @@ class AddBoard extends Component {
       }
 
   render() {
-    const styles = {
-      tempStyle: {
-        border: "1px solid black"
-      }
-    };
     return (
       //This is where you would be able to add a board
-      <div style={styles.tempStyle}>
-        <form
-          onSubmit={e => {this.handleSubmit(e)}}
-        >
+      <StyledAddBoard>
+        {this.state.display === true ? <i className="fas fa-plus-square fa-2x addBoard" onClick={this.toggle}></i>
+        :
+        (<form>
           <input
             name="name"
-            placeholder="Please add board here"
+            placeholder="Enter Board Name..."
             onChange={this.boardHandleChange}
             value={this.state.name}
           />
           <br />
-          <StyledLoginButton>Add Board</StyledLoginButton>
-        </form>
-      </div>
+          <StyledLoginButton onClick={this.toggle}>Cancel</StyledLoginButton>
+          <StyledLoginButton onClick={e => {this.handleSubmit(e)}}>Add Board</StyledLoginButton>
+        </form>)
+      }
+      </StyledAddBoard>
     );
   }
 }
