@@ -7,14 +7,18 @@ import SignUp from "./SignUp";
 const Nav = props => {
 const { boardHandleSubmit, deleteBoard, updateBoard, updateThisBoard, isEdit, editBoard, displayTasks, userId, highLight, selectedBoard, token, logoutUser } = props;
   const { addBoard, boards } = props.User;
+  const userName = props.username.toUpperCase()
   const styles = {
-    div:{
-      backgroundColor: '#40a700',
-      borderLeft: '1px solid slategray'
-    } 
+    buttonDiv: {
+      marginTop: 'auto',
+      display: 'flex',
+      flexDirection: 'column'
+    },
+    logoutButton: {
+      marginRight: '10px'
+    }
   }
   return (
-    <div style={styles.div}>
     <StyledBase>
       {!token ? (
         props.display === true ? (
@@ -38,9 +42,13 @@ const { boardHandleSubmit, deleteBoard, updateBoard, updateThisBoard, isEdit, ed
           highLight={highLight}
         />
       )}
-    </StyledBase>
-      {token && <StyledLogoutButton onClick={logoutUser}>logout</StyledLogoutButton>}<br></br>
+      <div style={styles.buttonDiv}>
+        {userName}
+        {token && <StyledLogoutButton onClick={logoutUser} style={styles.logoutButton}>logout</StyledLogoutButton>}
       </div>
+    </StyledBase>
+      
+  
   );
 };
 
