@@ -1,5 +1,10 @@
-import React, { Component } from 'react';
-import { StyledBoardIconDiv, StyledBoard, StyledBoardH2, StyledLoginButton } from '../../elements/index'
+import React, { Component } from "react";
+import {
+  StyledBoardIconDiv,
+  StyledBoard,
+  StyledBoardH2,
+  StyledLoginButton
+} from "../../elements/index";
 
 class Board extends Component {
     constructor(props){
@@ -20,29 +25,39 @@ class Board extends Component {
             })
     }
 
-    editToggle = () => {
-        this.setState(prevState => {
-            return {
-                edit: !prevState.edit
-            }
-        })
-    }
-
-    boardHandleChange = e => {
-        e.persist();
-        const { value } = e.target;
-        this.setState({ name : value });
+  highlightToggle = () => {
+    this.setState(ps => {
+      return {
+        toggleHighlight: !ps.toggleHighlight
       };
+    });
+  };
 
+  editToggle = () => {
+    this.setState(prevState => {
+      return {
+        edit: !prevState.edit
+      };
+    });
+  };
 
-componentDidUpdate(){
-    if(this.props.selectedBoard !== this.props._id && this.state.toggleHighlight){
-        this.setState({ toggleHighlight : false })
+  boardHandleChange = e => {
+    e.persist();
+    const { value } = e.target;
+    this.setState({ name: value });
+  };
+
+  componentDidUpdate() {
+    if (
+      this.props.selectedBoard !== this.props._id &&
+      this.state.toggleHighlight
+    ) {
+      this.setState({ toggleHighlight: false });
     }
-}
+  }
 
-    render(){
-    const { name, _id, deleteBoard, updateBoard, displayTasks } = this.props
+  render() {
+    const { name, _id, deleteBoard, updateBoard, displayTasks } = this.props;
     return (
         <StyledBoard isToggled={this.state.toggleHighlight} >
                 <StyledBoardH2 onClick={() => {
