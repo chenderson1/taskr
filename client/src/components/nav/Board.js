@@ -10,7 +10,7 @@ import "react-sweet-progress/lib/style.css";
 
 class Board extends Component {
   constructor(props) {
-    super();
+    super(props);
     this.state = {
       toggleHighlight: false,
       edit: false,
@@ -23,6 +23,14 @@ class Board extends Component {
       }
     };
   }
+
+  highlightToggle = () => {
+    this.setState(ps => {
+      return {
+        toggleHighlight: !ps.toggleHighlight
+      };
+    });
+  };
 
   highlightToggle = () => {
     this.setState(ps => {
@@ -108,11 +116,7 @@ class Board extends Component {
             <StyledLoginButton onClick={this.editToggle}>
               Cancel
             </StyledLoginButton>
-            <StyledLoginButton
-              onClick={e => {
-                updateBoard(e, { _id: this.state._id, name: this.state.name });
-              }}
-            >
+            <StyledLoginButton onClick={e => updateBoard(e, this.state._id)}>
               Update Board
             </StyledLoginButton>
           </form>
@@ -121,8 +125,8 @@ class Board extends Component {
         )}
         {this.state.toggleHighlight && (
           <StyledBoardIconDiv>
-            <i class="fas fa-trash" onClick={() => deleteBoard(_id)} />
-            <i class="fas fa-edit" onClick={this.editToggle} />
+            <i className="fas fa-trash" onClick={() => deleteBoard(_id)} />
+            <i className="fas fa-edit" onClick={this.editToggle} />
           </StyledBoardIconDiv>
         )}
       </StyledBoard>

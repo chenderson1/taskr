@@ -178,8 +178,8 @@ class Main extends Component {
   componentDidUpdate(prevProps) {
     if (prevProps.token !== this.props.token) {
       this.getUserBoards();
-    }
   }
+}
   componentDidMount() {
     //  if(this.props.token){
     this.getUserBoards();
@@ -209,7 +209,8 @@ class Main extends Component {
       updateBoard: this.editBoard,
       displayTasks: this.displayTasks,
       token: this.props.token,
-      ...this.state
+      ...this.state,
+      ...this.props
     };
     const styles = {
       mainDiv: {
