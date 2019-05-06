@@ -81,7 +81,9 @@ class Main extends Component {
         password: password
       });
       console.log(res.data);
-      this.setState({ isLoggedIn: true }, () => {this.updateNewUser()} ); //Board data not automatically rendering, using forceUpdate
+      this.setState({ isLoggedIn: true }, () => {
+        this.updateNewUser();
+      }); //Board data not automatically rendering, using forceUpdate
     } catch (err) {
       this.setState({ errorMessage: err });
       console.log(err);
@@ -89,24 +91,26 @@ class Main extends Component {
   };
 
   logoutUser = () => {
-    const res = 
-    this.setState({
-      isLoggedIn: false,
-      username: "",
-      password: "",
-      userId: "",
-      fName: "",
-      lName: "",
-      display: true,
-      newUser: {},
-      User: {
-        boards: []
+    const res = this.setState(
+      {
+        isLoggedIn: false,
+        username: "",
+        password: "",
+        userId: "",
+        fName: "",
+        lName: "",
+        display: true,
+        newUser: {},
+        User: {
+          boards: []
+        },
+        selectedBoard: "",
+        quote: "",
+        isEdit: false,
+        updateThisBoard: ""
       },
-      selectedBoard: "",
-      quote: "",
-      isEdit: false,
-      updateThisBoard: ""
-    }, () => this.props.logout());
+      () => this.props.logout()
+    );
     console.log(res);
   };
 
@@ -141,24 +145,15 @@ class Main extends Component {
         };
       });
     });
-};
+  };
 
   deleteBoard = id => {
     TaskrAxios.delete(`/api/boards/board/${id}`);
     this.getUserBoards();
   };
 
-  updateBoard = id => {
-    const formToUpdate = this.state.User.boards.find(board => board._id === id);
-    this.setState(ps => {
-      return {
-        updateThisBoard: formToUpdate,
-        isEdit: !ps.isEdit
-      };
-    });
-  };
-
-  editBoard = boardToEdit => {
+  editBoard = (e, boardToEdit) => {
+    e.preventDefault();
     TaskrAxios.put(`/api/boards/board/${boardToEdit._id}`, boardToEdit).then(
       res => {
         console.log(res.data);
@@ -179,25 +174,25 @@ class Main extends Component {
       }
     );
   };
-  
-  componentDidUpdate(prevProps){
-   if(prevProps.token !== this.props.token){
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.token !== this.props.token) {
       this.getUserBoards();
     }
   }
-  componentDidMount(){
-  //  if(this.props.token){
-  //     this.getUserBoards();
-  //   }
+  componentDidMount() {
+    //  if(this.props.token){
+    this.getUserBoards();
+    //   }
     this.getQuote();
   }
 
   displayTasks = boardId => {
     // console.log(boardId)
-    this.setState(ps => { 
+    this.setState(ps => {
       return {
         selectedBoard: boardId
-      }  
+      };
     });
   };
 
@@ -211,8 +206,7 @@ class Main extends Component {
       displayToggle: this.displayToggle,
       postUserBoards: this.postUserBoards,
       deleteBoard: this.deleteBoard,
-      updateBoard: this.updateBoard,
-      editBoard: this.editBoard,
+      updateBoard: this.editBoard,
       displayTasks: this.displayTasks,
       token: this.props.token,
       ...this.state
