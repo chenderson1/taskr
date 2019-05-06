@@ -175,10 +175,15 @@ class Main extends Component {
     );
   };
 
-  componentDidMount() {
-    if (this.props.user._id) {
+  componentDidUpdate(prevProps) {
+    if (prevProps.token !== this.props.token) {
       this.getUserBoards();
     }
+  }
+  componentDidMount() {
+    //  if(this.props.token){
+    this.getUserBoards();
+    //   }
     this.getQuote();
   }
 
