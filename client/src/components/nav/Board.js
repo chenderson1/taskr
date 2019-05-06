@@ -5,6 +5,8 @@ import {
   StyledBoardH2,
   StyledLoginButton
 } from "../../elements/index";
+import { Progress } from "react-sweet-progress";
+import "react-sweet-progress/lib/style.css";
 
 class Board extends Component {
   constructor(props) {
@@ -13,7 +15,12 @@ class Board extends Component {
       toggleHighlight: false,
       edit: false,
       name: props.name,
-      _id: props._id
+      _id: props._id,
+      progress: {
+        percent: Math.floor(Math.random() * 100),
+        numOfCompletedTask: 0,
+        status: "success"
+      }
     };
   }
 
@@ -58,6 +65,29 @@ class Board extends Component {
 
   render() {
     const { name, _id, deleteBoard, updateBoard, displayTasks } = this.props;
+
+    const theme = {
+      error: {
+        symbol: this.state.progress.percent + "%",
+        trailColor: "pink",
+        color: "red"
+      },
+      default: {
+        symbol: this.state.progress.percent + "%",
+        trailColor: "lightblue",
+        color: "blue"
+      },
+      active: {
+        symbol: this.state.progress.percent + "%",
+        trailColor: "yellow",
+        color: "orange"
+      },
+      success: {
+        symbol: this.state.progress.percent + "%",
+        trailColor: "fea42a",
+        color: "#ff7300"
+      }
+    };
     return (
       <StyledBoard isToggled={this.state.toggleHighlight}>
         <StyledBoardH2
@@ -68,6 +98,12 @@ class Board extends Component {
         >
           {name}
         </StyledBoardH2>
+        <Progress
+          theme={theme}
+          percent={this.state.progress.percent}
+          status={this.state.progress.status}
+        />
+        <br />
         {this.state.edit === true ? (
           <form>
             <input
@@ -81,9 +117,10 @@ class Board extends Component {
               Cancel
             </StyledLoginButton>
             <StyledLoginButton
-              onClick={e =>
-                updateBoard(e, { _id: this.state._id, name: this.state.name })
-              }
+              onClick={e => {
+                updateBoard(e, { _id: this.state._id, name: this.state.name });
+                this.editToggle();
+              }}
             >
               Update Board
             </StyledLoginButton>
