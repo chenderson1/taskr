@@ -116,7 +116,12 @@ class Board extends Component {
             <StyledLoginButton onClick={this.editToggle}>
               Cancel
             </StyledLoginButton>
-            <StyledLoginButton onClick={e => updateBoard(e, this.state._id)}>
+            <StyledLoginButton
+              onClick={e => {
+                updateBoard(e, { _id: this.state._id, name: this.state.name });
+                this.editToggle();
+              }}
+            >
               Update Board
             </StyledLoginButton>
           </form>

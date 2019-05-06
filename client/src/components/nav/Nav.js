@@ -7,12 +7,12 @@ import SignUp from "./SignUp";
 const Nav = props => {
 const { boardHandleSubmit, deleteBoard, updateBoard, updateThisBoard, isEdit, editBoard, displayTasks, userId, highLight, selectedBoard, token, logoutUser } = props;
   const { addBoard, boards } = props.User;
-  const userName = props.user.username.toUpperCase()
+  let userName = props.user.username && props.user.username.toUpperCase()
   const styles = {
     buttonDiv: {
       marginTop: 'auto',
       display: 'flex',
-      flexDirection: 'column'
+  SVGAnimatedLength
     },
     logoutButton: {
       marginRight: '10px'
