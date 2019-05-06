@@ -81,32 +81,36 @@ class Main extends Component {
         password: password
       });
       console.log(res.data);
-      this.setState({ isLoggedIn: true });
+      this.setState({ isLoggedIn: true }, () => {
+        this.updateNewUser();
+      }); //Board data not automatically rendering, using forceUpdate
     } catch (err) {
       this.setState({ errorMessage: err });
       console.log(err);
     }
   };
 
-  logoutUser = async () => {
-    const res = await this.props.logout();
-    this.setState({
-      isLoggedIn: false,
-      username: "",
-      password: "",
-      userId: "",
-      fName: "",
-      lName: "",
-      display: true,
-      newUser: {},
-      User: {
-        boards: []
+  logoutUser = () => {
+    const res = this.setState(
+      {
+        isLoggedIn: false,
+        username: "",
+        password: "",
+        userId: "",
+        fName: "",
+        lName: "",
+        display: true,
+        newUser: {},
+        User: {
+          boards: []
+        },
+        selectedBoard: "",
+        quote: "",
+        isEdit: false,
+        updateThisBoard: ""
       },
-      selectedBoard: "",
-      quote: "",
-      isEdit: false,
-      updateThisBoard: ""
-    });
+      () => this.props.logout()
+    );
     console.log(res);
   };
 
@@ -122,7 +126,7 @@ class Main extends Component {
   // Works, gets the quote of the
   // day and displays it in the header after login
   getQuote = () => {
-    TaskrAxios.get("http://quotes.rest/qod.json").then(res => {
+    axios.get("http://quotes.rest/qod.json").then(res => {
       const quote = res.data.contents.quotes[0].quote;
       this.setState({ quote: quote });
     });
@@ -141,24 +145,15 @@ class Main extends Component {
         };
       });
     });
-};
+  };
 
   deleteBoard = id => {
     TaskrAxios.delete(`/api/boards/board/${id}`);
     this.getUserBoards();
   };
 
-  updateBoard = id => {
-    const formToUpdate = this.state.User.boards.find(board => board._id === id);
-    this.setState(ps => {
-      return {
-        updateThisBoard: formToUpdate,
-        isEdit: !ps.isEdit
-      };
-    });
-  };
-
-  editBoard = boardToEdit => {
+  editBoard = (e, boardToEdit) => {
+    e.preventDefault();
     TaskrAxios.put(`/api/boards/board/${boardToEdit._id}`, boardToEdit).then(
       res => {
         console.log(res.data);
@@ -179,19 +174,25 @@ class Main extends Component {
       }
     );
   };
-  componentDidMount(){
-    if(this.props.user._id){
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.token !== this.props.token) {
       this.getUserBoards();
     }
+  }
+  componentDidMount() {
+    //  if(this.props.token){
+    this.getUserBoards();
+    //   }
     this.getQuote();
   }
 
   displayTasks = boardId => {
     // console.log(boardId)
-    this.setState(ps => { 
+    this.setState(ps => {
       return {
         selectedBoard: boardId
-      }  
+      };
     });
   };
 
@@ -205,9 +206,9 @@ class Main extends Component {
       displayToggle: this.displayToggle,
       postUserBoards: this.postUserBoards,
       deleteBoard: this.deleteBoard,
-      updateBoard: this.updateBoard,
-      editBoard: this.editBoard,
+      updateBoard: this.editBoard,
       displayTasks: this.displayTasks,
+      token: this.props.token,
       ...this.state
     };
     const styles = {
@@ -220,7 +221,7 @@ class Main extends Component {
       <div>
         <div style={styles.mainDiv}>
           <Nav {...props} />
-          {this.state.isLoggedIn === false ? (
+          {!this.props.token ? (
             <Landing {...props} />
           ) : (
             <Dashboard {...props} />

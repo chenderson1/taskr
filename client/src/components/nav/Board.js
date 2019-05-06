@@ -1,14 +1,21 @@
 import React, { Component } from "react";
-import { StyledBoardButton } from "../../elements/Buttons";
-import { StyledBoard } from "../../elements/StyledBoard";
+import {
+  StyledBoardIconDiv,
+  StyledBoard,
+  StyledBoardH2,
+  StyledLoginButton
+} from "../../elements/index";
 import { Progress } from "react-sweet-progress";
 import "react-sweet-progress/lib/style.css";
 
 class Board extends Component {
   constructor(props) {
-    super(props);
+    super();
     this.state = {
       toggleHighlight: false,
+      edit: false,
+      name: props.name,
+      _id: props._id,
       progress: {
         percent: Math.floor(Math.random() * 100),
         numOfCompletedTask: 0,
@@ -23,6 +30,20 @@ class Board extends Component {
         toggleHighlight: !ps.toggleHighlight
       };
     });
+  };
+
+  editToggle = () => {
+    this.setState(prevState => {
+      return {
+        edit: !prevState.edit
+      };
+    });
+  };
+
+  boardHandleChange = e => {
+    e.persist();
+    const { value } = e.target;
+    this.setState({ name: value });
   };
 
   componentDidUpdate() {
@@ -59,29 +80,51 @@ class Board extends Component {
         color: "#ff7300"
       }
     };
-
     return (
-      <StyledBoard
-        isToggled={this.state.toggleHighlight}
-        onClick={() => {
-          this.highlightToggle();
-          displayTasks(_id);
-        }}
-      >
-        <h1>{name}</h1>
-        <br />
+      <StyledBoard isToggled={this.state.toggleHighlight}>
+        <StyledBoardH2
+          onClick={() => {
+            this.highlightToggle();
+            displayTasks(_id);
+          }}
+        >
+          {name}
+        </StyledBoardH2>
         <Progress
           theme={theme}
           percent={this.state.progress.percent}
           status={this.state.progress.status}
         />
         <br />
-        <StyledBoardButton onClick={() => updateBoard(_id)}>
-          update
-        </StyledBoardButton>
-        <StyledBoardButton onClick={() => deleteBoard(_id)}>
-          delete
-        </StyledBoardButton>
+        {this.state.edit === true ? (
+          <form>
+            <input
+              name="name"
+              placeholder="Enter Board Name..."
+              onChange={this.boardHandleChange}
+              value={this.state.name}
+            />
+            <br />
+            <StyledLoginButton onClick={this.editToggle}>
+              Cancel
+            </StyledLoginButton>
+            <StyledLoginButton
+              onClick={e => {
+                updateBoard(e, { _id: this.state._id, name: this.state.name });
+              }}
+            >
+              Update Board
+            </StyledLoginButton>
+          </form>
+        ) : (
+          <span />
+        )}
+        {this.state.toggleHighlight && (
+          <StyledBoardIconDiv>
+            <i class="fas fa-trash" onClick={() => deleteBoard(_id)} />
+            <i class="fas fa-edit" onClick={this.editToggle} />
+          </StyledBoardIconDiv>
+        )}
       </StyledBoard>
     );
   }

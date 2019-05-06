@@ -2,16 +2,15 @@ import styled from "styled-components";
 
 export const StyledCard = styled.div`
   width: 200px;
-
   border-radius: 5px;
 `;
 
-export const StyledTaskCard = styled(StyledCard)`
+export const StyledTaskCard = styled.div`
   background-color: #fefffa;
-  margin: 5px;
+  margin-top: 15px;
+  margin-left: 15px;
   padding: 5px;
-  min-width: 600px;
-  min-height: 100px;
+  border-radius: 5px;
   display: flex;
   flex-flow: column wrap;
   align-content: center;
@@ -38,16 +37,14 @@ export const StyledParentCard = styled.div`
   justify-content: center;
   align-content: center;
   grid-gap: 10px;
-  /* border1top: darkslategray 2px solid; */
   padding-top: 20px;
 `;
-
-export const StyledTaskTile = styled.div``;
 
 export const StyledInfo = styled.div`
   text-align: left;
   padding: 10px;
 `;
+
 export const StyledTaskrInfo = styled(StyledInfo)`
   background-color: #fbfbfb;
   border-radius: 10px;
