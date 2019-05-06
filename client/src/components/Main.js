@@ -148,17 +148,22 @@ class Main extends Component {
     this.getUserBoards();
   };
 
-  updateBoard = id => {
-    const formToUpdate = this.state.User.boards.find(board => board._id === id);
+  updateBoard = (e, id) => {
+    e.preventDefault()
+    console.log(id)
+    const formToUpdate = this.state.User.boards.filter(board => board._id === id);
+    console.log(formToUpdate)
     this.setState(ps => {
       return {
         updateThisBoard: formToUpdate,
         isEdit: !ps.isEdit
       };
     });
+    console.log(this.state.updateThisBoard.name)
   };
 
   editBoard = boardToEdit => {
+    console.log(boardToEdit)
     TaskrAxios.put(`/api/boards/board/${boardToEdit._id}`, boardToEdit).then(
       res => {
         console.log(res.data);
@@ -183,12 +188,10 @@ class Main extends Component {
   componentDidUpdate(prevProps){
    if(prevProps.token !== this.props.token){
       this.getUserBoards();
-    }
   }
+}
   componentDidMount(){
-  //  if(this.props.token){
-  //     this.getUserBoards();
-  //   }
+      this.getUserBoards();
     this.getQuote();
   }
 
@@ -215,7 +218,8 @@ class Main extends Component {
       editBoard: this.editBoard,
       displayTasks: this.displayTasks,
       token: this.props.token,
-      ...this.state
+      ...this.state,
+      ...this.props
     };
     const styles = {
       mainDiv: {

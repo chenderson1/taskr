@@ -3,7 +3,7 @@ import { StyledBoardIconDiv, StyledBoard, StyledBoardH2, StyledLoginButton } fro
 
 class Board extends Component {
     constructor(props){
-        super();
+        super(props);
         this.state = {
             toggleHighlight: false,
             edit: false,
@@ -60,15 +60,15 @@ componentDidUpdate(){
                     />
                     <br />
                     <StyledLoginButton onClick={this.editToggle}>Cancel</StyledLoginButton>
-                    <StyledLoginButton onClick={() => updateBoard(this.state._id)}>Update Board</StyledLoginButton>
+                    <StyledLoginButton onClick={(e) => updateBoard(e, this.state._id)}>Update Board</StyledLoginButton>
                     </form>) 
                     :
                     <span></span>
                 }
                 {this.state.toggleHighlight  && 
                 (<StyledBoardIconDiv>
-                    <i class="fas fa-trash"  onClick={() => deleteBoard(_id)}></i>
-                    <i class="fas fa-edit"  onClick={this.editToggle}></i>                    
+                    <i className="fas fa-trash"  onClick={() => deleteBoard(_id)}></i>
+                    <i className="fas fa-edit"  onClick={this.editToggle}></i>                    
                 </StyledBoardIconDiv>)
                 }
         </StyledBoard>
