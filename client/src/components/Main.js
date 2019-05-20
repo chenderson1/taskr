@@ -80,7 +80,6 @@ class Main extends Component {
         username: username,
         password: password
       });
-      console.log(res.data);
       this.setState({ isLoggedIn: true }, () => {
         this.updateNewUser();
       }); //Board data not automatically rendering, using forceUpdate
