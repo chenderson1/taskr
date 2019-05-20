@@ -12,6 +12,7 @@ const { boardHandleSubmit, deleteBoard, updateBoard, updateThisBoard, isEdit, ed
     buttonDiv: {
       marginTop: 'auto',
       display: 'flex',
+      flexDirection: 'column',
   SVGAnimatedLength
     },
     logoutButton: {
