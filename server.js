@@ -10,15 +10,17 @@ const userRoutes = require("./routes/userRoutes");
 const taskRoutes = require("./routes/taskRoutes");
 
 const PORT = process.env.PORT || 5100;
+const path = require("path");
 
 //global middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(morgan("dev"));
+app.use(express.static(path.join(__dirname, "client", "build")));
 
 //DB connect
 mongoose.connect(
-  "mongodb://localhost:27017/taskr",
+  process.env.MONGODB_URI || "mongodb://localhost:27017/taskr",
   { useNewUrlParser: true, useCreateIndex: true },
   () => console.log("connected to DB".rainbow)
 );
@@ -40,6 +42,10 @@ app.use((err, req, res, next) => {
     res.status(err.status);
   }
   return res.send({ errMsg: err.message });
+});
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "client", "build", "index.html"));
 });
 
 //server listen
